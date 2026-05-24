@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardWidth">50dp</dimen>
+    <dimen name="cardHeight">64dp</dimen>
+    <dimen name="cardOffsetH">-60dp</dimen>
+    <dimen name="cardOffsetHFirst">-10dp</dimen>
+    <dimen name="marginFromGuides">1dp</dimen>
+    <item name="pileSymbolAlpha" type="dimen" format="float">0.4</item>
+</resources>

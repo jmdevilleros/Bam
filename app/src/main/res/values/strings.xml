@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Bam!</string>
+    <string name="CardBackName">back</string>
+    <string name="game_version">Bam! v0.1.0 (Russian Bank / Crapette variant)</string>
+</resources>

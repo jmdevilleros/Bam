@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainFrame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tablebackground"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_version"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/indicador1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FBC02D"
+        android:text=" Jugador 1 "
+        android:textColor="#004D40"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/p1Pull"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/indicador2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FBC02D"
+        android:rotation="180"
+        android:text=" Jugador 2 "
+        android:textColor="#004D40"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/p2Pull"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/p2Row4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quarterGuide"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p2Row3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toRightOf="@id/p2Row4"
+        app:layout_constraintTop_toBottomOf="@id/quarterGuide"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p2Row2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/quarterGuide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p2Row1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/quarterGuide"
+        app:layout_constraintLeft_toRightOf="@id/p2Row2"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Dump"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="90"
+        app:layout_constraintEnd_toStartOf="@+id/p1Pull"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomGuide">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Pull"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        app:layout_constraintEnd_toStartOf="@+id/p1Hell"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Dump"
+        app:layout_constraintTop_toBottomOf="@id/bottomGuide">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Hell"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Pull"
+        app:layout_constraintTop_toBottomOf="@id/bottomGuide">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/p1Row1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/threeQuarterGuide"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p1Row2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toRightOf="@id/p1Row1"
+        app:layout_constraintTop_toBottomOf="@id/threeQuarterGuide"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p1Row3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/threeQuarterGuide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p1Row4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/disabledstackborder"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/threeQuarterGuide"
+        app:layout_constraintLeft_toRightOf="@id/p1Row3"
+        app:layout_constraintWidth_percent="0.5">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Spades"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        app:layout_constraintEnd_toStartOf="@+id/p1Diamonds"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/middleGuide">
+
+        <ImageView
+            android:id="@+id/spades_symbol1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_spades" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Diamonds"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        app:layout_constraintEnd_toStartOf="@+id/p1Clubs"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Spades"
+        app:layout_constraintTop_toTopOf="@+id/middleGuide">
+
+        <ImageView
+            android:id="@+id/diamonds_symbol1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_diamonds" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Hearts"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Clubs"
+        app:layout_constraintTop_toTopOf="@+id/middleGuide">
+
+        <ImageView
+            android:id="@+id/hearts_symbol1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_hearts" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p1Clubs"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginTop="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        app:layout_constraintEnd_toStartOf="@+id/p1Hearts"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Diamonds"
+        app:layout_constraintTop_toTopOf="@+id/middleGuide">
+
+        <ImageView
+            android:id="@+id/clubs_symbol1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_clubs" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Hell"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@id/topGuide"
+        app:layout_constraintEnd_toStartOf="@+id/p2Pull"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Pull"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@id/topGuide"
+        app:layout_constraintEnd_toStartOf="@+id/p2Dump"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p2Hell">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Dump"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@id/topGuide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p2Pull">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Clubs"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@+id/middleGuide"
+        app:layout_constraintEnd_toStartOf="@+id/p2Hearts"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p2Diamonds">
+
+        <ImageView
+            android:id="@+id/clubs_symbol2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_clubs" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Diamonds"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@+id/middleGuide"
+        app:layout_constraintEnd_toStartOf="@+id/p2Clubs"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p2Spades">
+
+        <ImageView
+            android:id="@+id/diamonds_symbol2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_diamonds" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Spades"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@+id/middleGuide"
+        app:layout_constraintEnd_toStartOf="@+id/p2Diamonds"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/spades_symbol2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_spades" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/p2Hearts"
+        android:layout_width="@dimen/cardWidth"
+        android:layout_height="@dimen/cardHeight"
+        android:layout_marginBottom="@dimen/marginFromGuides"
+        android:background="@drawable/normalstackborder"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@+id/middleGuide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p2Clubs">
+
+        <ImageView
+            android:id="@+id/hearts_symbol2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/pileSymbolAlpha"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            app:srcCompat="@drawable/suit_hearts" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.495" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/quarterGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.26" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/threeQuarterGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
