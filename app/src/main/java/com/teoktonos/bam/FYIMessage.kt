@@ -7,7 +7,7 @@ import android.os.Vibrator
 import android.widget.Toast
 
 /**
- * Shows temporary messages to the player (used for rule violations and "Pun" warnings).
+ * Shows temporary messages to the player (used for rule violations and "Bam" warnings).
  */
 class FYIMessage(private val context: Context, private val message: String) {
 

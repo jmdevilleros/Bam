@@ -6,7 +6,7 @@ import com.teoktonos.bam.model.cards.Rank
 
 /**
  * Contains all the validation rules for the game.
- * This is the heart of the "Bam" / "Pun" / "Tunj" penalty mechanic.
+ * This is the heart of the "Bam!" penalty mechanic (also known as Pun/Tunj in some variants).
  */
 class BamRules(private val game: BamGame) {
 
@@ -21,7 +21,10 @@ class BamRules(private val game: BamGame) {
      */
     val shouldMoveOrBam: List<CardStack>
         get() = (game.currentPlayer.zone.mainStacks + game.allRows)
-            .filter { stack -> stack.top() in bamCandidateCards }
+            .filter { stack ->
+                val top = stack.top()
+                top?.faceup == true && bamCandidateCards.any { it.rank == top.rank && it.suit == top.suit }
+            }
 
     /**
      * Determines whether performing this action during the current state would be a "Bam".

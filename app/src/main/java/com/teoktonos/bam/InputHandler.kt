@@ -55,7 +55,7 @@ open class InputHandler(
             }
         }
 
-        if (action.isIllegalOrPun()) return
+        if (action.isIllegalOrBam()) return
 
         when (action) {
             is PullAction, is RevealAction -> target.topCard()?.flip()
@@ -96,26 +96,40 @@ open class InputHandler(
 
     // ==================== Drag & Drop Handling ====================
 
+    // Used to track the visual card across the entire drag session (STARTED → DROP → ENDED),
+    // because after a successful drop the card no longer lives in its original sourceView.
+    private var currentDraggedCard: GraphicCard? = null
+
     override fun onDrag(target: View?, event: DragEvent): Boolean {
+        if (game.winner != null) return false
+
         val sourceStack = event.localState as? CardStack ?: return false
-        val draggedView = (event.localState as? ViewGroup)?.topCard() ?: return false
+        val sourceView = stacksToViewsBridge.stackViewMap[sourceStack] ?: return false
 
         when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
-                draggedView.visibility = View.INVISIBLE
+                currentDraggedCard = sourceView.topCard()
+                currentDraggedCard?.visibility = View.INVISIBLE
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
-                target?.background = context.resources.getDrawable(R.drawable.selectedstackborder)
+                (target as? ViewGroup)?.background = context.resources.getDrawable(R.drawable.selectedstackborder)
             }
             DragEvent.ACTION_DRAG_EXITED -> {
                 (target as? ViewGroup)?.resetBackground(game, stacksToViewsBridge)
             }
             DragEvent.ACTION_DROP -> {
-                val targetStack = stacksToViewsBridge.viewStackMap[target as ViewGroup]
-                return attemptMove(sourceStack, targetStack ?: return false, draggedView, target)
+                val targetView = target as? ViewGroup ?: return false
+                val targetStack = stacksToViewsBridge.viewStackMap[targetView] ?: return false
+                val draggedView = currentDraggedCard ?: sourceView.topCard() ?: return false
+                return attemptMove(sourceStack, targetStack, draggedView, targetView)
             }
             DragEvent.ACTION_DRAG_ENDED -> {
-                endDrag(draggedView, target as? ViewGroup)
+                // Restore visibility of the card we were dragging (it may now be in a different parent)
+                currentDraggedCard?.visibility = View.VISIBLE
+                currentDraggedCard = null
+
+                (target as? ViewGroup)?.resetBackground(game, stacksToViewsBridge)
+                sourceView.resetBackground(game, stacksToViewsBridge)
             }
         }
         return true
@@ -131,7 +145,7 @@ open class InputHandler(
 
         val action = MoveAction(game.currentPlayer, sourceStack, targetStack)
 
-        if (action.isIllegalOrPun()) return false
+        if (action.isIllegalOrBam()) return false
 
         target.putCard(draggedView, stacksToViewsBridge)
 
@@ -155,8 +169,45 @@ open class InputHandler(
     }
 
     private fun endTurn() {
-        // In the full implementation this would advance the turn
-        // For now we just let the game engine handle it via the model
+        // Normal end of turn (after dumping to own dump): do cleanup then switch
+        val current = game.currentPlayer.zone
+        val currentHellView = stacksToViewsBridge.stackViewMap[current.hell]
+        val currentPullView = stacksToViewsBridge.stackViewMap[current.pull]
+        val currentDumpView = stacksToViewsBridge.stackViewMap[current.dump]
+
+        // Reveal hell top if needed
+        val hellTop = currentHellView?.topCard()
+        if (hellTop?.isFaceUp == false) {
+            FYIMessage(context, "Revelando infierno").display(msgDelay, msgRotation)
+            hellTop.flip()
+        }
+
+        // Move revealed pull card to dump (classic Russian Bank behavior)
+        val pullTop = currentPullView?.topCard()
+        if (pullTop?.isFaceUp == true && currentDumpView != null) {
+            FYIMessage(context, "Descartando").display(msgDelay, msgRotation)
+            currentDumpView.putCard(pullTop, stacksToViewsBridge)
+        }
+
+        switchToNextPlayer()
+    }
+
+    /**
+     * Immediately ends the current player's turn and gives it to the opponent.
+     * Used both for normal dump and for BAM! penalty.
+     */
+    private fun switchToNextPlayer() {
+        FYIMessage(context, "Fin del turno").display(msgDelay / 2, msgRotation)
+
+        game.currentPlayer = game.playRotation.next()
+        if (game.currentPlayer == game.playOrder.first()) {
+            game.currentTurn++
+        }
+
+        // Refresh row availability visuals for the new player
+        game.validRows.forEach { row ->
+            stacksToViewsBridge.stackViewMap[row]?.resetBackground(game, stacksToViewsBridge)
+        }
     }
 
     private fun congratulateWinner() {
@@ -167,23 +218,27 @@ open class InputHandler(
             .show()
     }
 
-    // ==================== Helper: Illegal or Pun ====================
+    // ==================== Helper: Illegal or Bam ====================
 
-    private fun BamAction.isIllegalOrPun(): Boolean {
+    private fun BamAction.isIllegalOrBam(): Boolean {
         val result = verify()
         if (!result.OK) {
             FYIMessage(context, result.detail).display(msgDelay, msgRotation)
             return true
         }
         if (isBam) {
-            notifyPun()
+            notifyBam()
             return true
         }
         return false
     }
 
-    private fun notifyPun() {
-        val punCard = game.rules.shouldMoveOrBam.firstOrNull()?.top() ?: return
-        FYIMessage(context, "¡Pun! Podías mover $punCard").display(msgDelay, msgRotation)
+    private fun notifyBam() {
+        val bamCard = game.rules.shouldMoveOrBam.firstOrNull()?.top() ?: return
+        FYIMessage(context, "¡Bam! Podías mover $bamCard").display(msgDelay, msgRotation)
+
+        // BAM! penalty: immediately pass the turn to the other player
+        DeviceVibrator(context).vibrate(400)
+        switchToNextPlayer()
     }
 }

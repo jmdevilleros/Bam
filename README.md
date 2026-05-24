@@ -2,7 +2,7 @@
 
 **Bam!** es una implementación moderna para Android del clásico juego de cartas **Russian Bank** (también conocido como **Crapette** o **Tunj**).
 
-El nombre del juego proviene del grito de penalización **"¡Bam!"** (o "¡Pun!" en algunas variantes), que se lanza cuando un jugador no realiza un movimiento obligatorio a las fundaciones.
+El nombre del juego proviene del grito de penalización **"¡Bam!"**, que se lanza cuando un jugador no realiza un movimiento obligatorio a las fundaciones (en algunas variantes se conoce como "¡Pun!").
 
 ---
 
@@ -11,7 +11,7 @@ El nombre del juego proviene del grito de penalización **"¡Bam!"** (o "¡Pun!"
 - ✅ El proyecto **compila y se ejecuta** correctamente
 - ✅ Motor de cartas 100% reimplementado en Kotlin (sin dependencias externas)
 - ✅ Lógica completa del juego portada (`BamGame`, `BamRules`, `BamActions`, etc.)
-- ✅ Sistema de "Bam/Pun" funcional
+- ✅ Sistema de "Bam!" funcional
 - ✅ IA básica del bot
 - ✅ Interfaz con **drag & drop**, animaciones y detección de ganador
 - ✅ ViewBinding + Kotlin moderno (JVM 17)

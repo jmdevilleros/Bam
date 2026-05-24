@@ -13,8 +13,8 @@ class BamPile(name: String, val suit: Suit) : CardStack(name) {
 
     fun next(): Card? = when {
         isFull()  -> null
-        isEmpty() -> Card(Rank.ACE, suit)
-        else      -> Card(top()!!.rank.nextOrNull()!!, suit)
+        isEmpty() -> Card(Rank.ACE, suit, faceup = true)
+        else      -> Card(top()!!.rank.nextOrNull()!!, suit, faceup = true)
     }
 
     fun isFull(): Boolean = top()?.rank == Rank.KING
